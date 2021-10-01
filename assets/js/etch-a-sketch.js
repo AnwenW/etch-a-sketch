@@ -14,7 +14,10 @@ ctx.lineWidth = 10; // default width 1px, don't have to specify the unit
 
 // Write a draw function
 
-
+ctx.beginPath();
+ctx.moveTo(200, 200);
+ctx.lineTo(200, 200);
+ctx.stroke();
 
 // Write handler for the keys -- need to know whether to move point up/ down/ left/ right
 
