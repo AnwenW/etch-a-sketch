@@ -18,7 +18,6 @@ const { width, height } = canvas;
 
 let x = Math.floor(Math.random() * width);
 let y = Math.floor(Math.random() * height);
-console.log(x, y);
 
 // Setup canvas for drawing
 
@@ -34,5 +33,15 @@ ctx.lineTo(x, y);
 ctx.stroke();
 
 // Write handler for the keys -- need to know whether to move point up/ down/ left/ right
+
+function handleKey(e) {
+    if(e.key.includes('Arrow')) { // arrow keys only
+        e.preventDefault(); // prevent keys scrolling window when smaller than page, but should make sure UI always fits inside window
+        console.log(e.key);
+    }
+}
+
+// Listen for arrow keys
+window.addEventListener('keydown', handleKey);
 
 // Write clear canvas/'shake' function
