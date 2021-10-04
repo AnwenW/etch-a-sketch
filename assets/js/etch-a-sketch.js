@@ -33,7 +33,16 @@ ctx.stroke();
 // Write a draw function
 
 function draw({ key }) {
-    console.log(key);
+    // start the path
+    ctx.beginPath();
+    // move ctx to where X and Y values were
+    ctx.moveTo(x, y);
+    // reassign X and Y on user key press -- not yet correct values but tests key response
+    x -= 10;
+    y -= 10;
+    // draw line to new X and Y point
+    ctx.lineTo(x, y);
+    ctx.stroke();
 }
 
 // Write handler for the keys -- need to know whether to move point up/ down/ left/ right
@@ -42,7 +51,6 @@ function handleKey(e) {
     if(e.key.includes('Arrow')) { // arrow keys only
         e.preventDefault(); // prevent keys scrolling window when smaller than page, but should make sure UI always fits inside window
         draw({ key: e.key });
-        console.log(e.key);
     }
 }
 
