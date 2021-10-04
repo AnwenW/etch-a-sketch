@@ -34,13 +34,30 @@ ctx.stroke();
 // Write a draw function
 
 function draw({ key }) {
+
     // start the path
     ctx.beginPath();
     // move ctx to where X and Y values were
     ctx.moveTo(x, y);
-    // reassign X and Y on user key press -- not yet correct values but tests key response
-    x -= MOVE_AMOUNT;
-    y -= MOVE_AMOUNT;
+
+    // reassign X and Y depending on keypress
+    switch(key) {
+        case 'ArrowUp':
+            y -= MOVE_AMOUNT;
+            break;
+        case 'ArrowDown':
+            y += MOVE_AMOUNT;
+            break;
+        case 'ArrowLeft':
+            x -= MOVE_AMOUNT;
+            break;
+        case 'ArrowRight':
+            x += MOVE_AMOUNT;
+            break;
+        default:
+            break;
+    }
+    
     // draw line to new X and Y point
     ctx.lineTo(x, y);
     ctx.stroke();
