@@ -25,18 +25,23 @@ ctx.lineJoin = 'round'; // round to ensure smooth line edges, squared by default
 ctx.lineCap = 'round';
 ctx.lineWidth = 10; // default width 1px, don't have to specify the unit
 
-// Write a draw function
-
 ctx.beginPath();
 ctx.moveTo(x, y);
 ctx.lineTo(x, y);
 ctx.stroke();
+
+// Write a draw function
+
+function draw(options) {
+    console.log(options);
+}
 
 // Write handler for the keys -- need to know whether to move point up/ down/ left/ right
 
 function handleKey(e) {
     if(e.key.includes('Arrow')) { // arrow keys only
         e.preventDefault(); // prevent keys scrolling window when smaller than page, but should make sure UI always fits inside window
+        draw({ key: e.key });
         console.log(e.key);
     }
 }
