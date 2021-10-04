@@ -5,6 +5,7 @@
 const canvas = document.querySelector('#etch-a-sketch');
 const ctx = canvas.getContext('2d'); // ctx is common for 'context'
 const shakeButton = document.querySelector('.shake');
+const MOVE_AMOUNT = 10; // true constant (that won't be changed) use caps/underscores
 
 // Set width/ height variables 
 // const width = canvas.width;
@@ -23,7 +24,7 @@ let y = Math.floor(Math.random() * height);
 
 ctx.lineJoin = 'round'; // round to ensure smooth line edges, squared by default
 ctx.lineCap = 'round';
-ctx.lineWidth = 10; // default width 1px, don't have to specify the unit
+ctx.lineWidth = MOVE_AMOUNT; // default width 1px, don't have to specify the unit
 
 ctx.beginPath();
 ctx.moveTo(x, y);
@@ -38,8 +39,8 @@ function draw({ key }) {
     // move ctx to where X and Y values were
     ctx.moveTo(x, y);
     // reassign X and Y on user key press -- not yet correct values but tests key response
-    x -= 10;
-    y -= 10;
+    x -= MOVE_AMOUNT;
+    y -= MOVE_AMOUNT;
     // draw line to new X and Y point
     ctx.lineTo(x, y);
     ctx.stroke();
