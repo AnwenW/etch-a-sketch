@@ -32,8 +32,8 @@ ctx.stroke();
 
 // Write a draw function
 
-function draw(options) {
-    console.log(options);
+function draw({ key }) {
+    console.log(key);
 }
 
 // Write handler for the keys -- need to know whether to move point up/ down/ left/ right
