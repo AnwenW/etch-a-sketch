@@ -72,11 +72,13 @@ function handleKey(e) {
 window.addEventListener('keydown', handleKey);
 
 // Write clear canvas/'shake' function
-
 function clearCanvas() {
     canvas.classList.add('shake');
-    canvas.addEventListener('animationend', function() {
-        // console.log('done the shake');
-        canvas.classList.remove('shake');
-    });
+    canvas.addEventListener(
+        'animationend', 
+        function() {
+            canvas.classList.remove('shake');
+        }, 
+        { once: true }
+    );
 }
