@@ -30,8 +30,8 @@ ctx.stroke();
 function draw({ key }) {
 
     // increment the hsl hue
-    // hue += 10;
-    ctx.strokeStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    hue += 2;
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
 
     // start the path
     ctx.beginPath();
@@ -72,3 +72,11 @@ function handleKey(e) {
 window.addEventListener('keydown', handleKey);
 
 // Write clear canvas/'shake' function
+
+function clearCanvas() {
+    canvas.classList.add('shake');
+    canvas.addEventListener('animationend', function() {
+        // console.log('done the shake');
+        canvas.classList.remove('shake');
+    });
+}
