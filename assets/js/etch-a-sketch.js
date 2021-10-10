@@ -18,7 +18,7 @@ ctx.lineCap = 'round';
 ctx.lineWidth = MOVE_AMOUNT; // default width 1px, don't have to specify the unit
 
 let hue = 0;
-ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; // hue (0 - 360), saturation (%), lightness (%)
+ctx.strokeStyle = `hsl(${hue}, 80%, 40%)`; // hue (0 - 360), saturation (%), lightness (%)
 /* strokeStyle set here on page load but needs explictly stating again in draw() when updated */
 
 ctx.beginPath();
@@ -31,7 +31,7 @@ function draw({ key }) {
 
     // increment the hsl hue
     hue += 2;
-    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    ctx.strokeStyle = `hsl(${hue}, 80%, 40%)`;
 
     // start the path
     ctx.beginPath();
