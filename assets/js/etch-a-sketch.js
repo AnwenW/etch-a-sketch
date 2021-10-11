@@ -1,5 +1,6 @@
 // Select the elements on the page -- canvas (and 2D context), shake button
 const canvas = document.querySelector('#etch-a-sketch');
+const frame = document.querySelector('.frame');
 const ctx = canvas.getContext('2d'); // ctx is common for 'context'
 const shakeButton = document.querySelector('.shake');
 const MOVE_AMOUNT = 10; // true constant (that won't be changed) use caps/underscores
@@ -71,12 +72,12 @@ function handleKey(e) {
 
 // Write clear canvas/'shake' function
 function clearCanvas() {
-    canvas.classList.add('shake');
+    frame.classList.add('shake');
     ctx.clearRect(0, 0, width, height);
-    canvas.addEventListener(
+    frame.addEventListener(
         'animationend', 
         function() {
-            canvas.classList.remove('shake');
+            frame.classList.remove('shake');
         }, 
         { once: true }
     );

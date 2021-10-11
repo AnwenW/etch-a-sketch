@@ -122,7 +122,7 @@ canvas {
 	right: -100px;
 }
 
-canvas.shake {
+.frame.shake {
 	animation: shake 0.5s linear 1;
 }
 
