@@ -26,13 +26,16 @@ body {
 
 /* .frame::before {
 	content: '';
-	width: 120%;
-	height: 120%;
-	display: block;
-	position: absolute;
-	top: -10%;
-	left: -10%;
-	border: 1px solid #000;
+    width: 121%;
+    height: 0;
+    display: block;
+    position: absolute;
+    top: -87px;
+    left: -13%;
+    border-top: 14px solid white;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    box-shadow: 0 -6px 5px -2px white;
 } */
 
 canvas {
