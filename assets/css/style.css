@@ -42,11 +42,11 @@ canvas {
 	height: 476px;
 	background: var(--silver);
 	background: linear-gradient(149deg, 
-				rgb(208,208,208) 0%, 
-				rgb(229,229,229) 12%, 
-				rgb(236,236,236) 27%, 
-				rgb(208,208,208) 55%, 
-				rgb(180,180,180) 86%);
+				#d0d0d0 0%, 
+				#e5e5e5 12%, 
+				#ececec 27%, 
+				#d0d0d0 55%, 
+				#b4b4b4 86%);
 	box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.6) inset;
 }
 
@@ -62,11 +62,53 @@ canvas {
 
 .frame__knob {
 	position: absolute;
-	width: 105px;
-	height: 105px;
-	border-radius: 50%;
-	background-color: #fff;
 	bottom: -119px;
+	width: 87px;
+	height: 87px;
+	border: double 11px transparent;
+	border-radius: 50%;
+	background-image: linear-gradient(#ffffff, #ffffff), 
+					  linear-gradient(170deg, #ffffff 0%, #dadada 74%, #adadad 100%);
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7);
+}
+
+/* https://stackoverflow.com/questions/5706963/possible-to-use-border-radius-together-with-a-border-image-which-has-a-gradient */
+
+.frame__knob::before {
+	position: absolute;
+	content: '';
+	display: block;
+	top: 3px;
+	left: 3px;
+	width: 93%;
+	height: 93%;
+	border-radius: 50%;
+	background: #fdfdfd;
+	background: radial-gradient(circle, 
+				#ffffff 0%, 
+				#ffffff 8%,
+				#fdfdfd 10%, 
+				#f1f1f1 56%, 
+				#dbdbdb 99%, 
+				#adadad 100%);
+}
+
+.frame__knob::after {
+	position: absolute;
+	content: '';
+	display: block;
+	top: 50%;
+	left: 28%;
+	width: 0;
+	height: 0;
+	border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 34px solid #ffffff;
+    border-radius: 39%;
+	box-shadow: 0px 9px 6px -7px rgba(255,255,255,0.85);
+	transform: rotate(-10deg);
 }
 
 .frame__knob--left {
