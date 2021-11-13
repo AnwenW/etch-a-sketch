@@ -2,6 +2,7 @@
 	--red: #e60b0b;
 	--silver: #d0d0d0;
 	--dark-grey: #4f4f4f;
+	--size: 1; /* 100% */
 }
 
 body {
@@ -15,12 +16,15 @@ body {
 }
 
 .frame {
-	border-width: 105px 112px 128px;
+	border-top-width: calc(105px * var(--size));
+	border-right-width: calc(112px * var(--size));
+	border-bottom-width: calc(128px * var(--size));
+	border-left-width: calc(112px * var(--size));
 	border-style: solid;
 	border-color: var(--red);
-	border-radius: 10px;
+	border-radius: calc(10px * var(--size));
 	background-color: var(--red);
-	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7);
+	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7); /* TODO replace these values? */
 	position: relative;
 }
 
@@ -34,29 +38,30 @@ body {
 
 .frame::before {
 	width: 121%;
-    top: -87px;
     left: -13%;
-    border-top: 14px solid rgba(255,255,255,0.65);
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-	filter: blur(3px);
+	top: -18%;
+    border-top: calc(14px * var(--size)) solid rgba(255,255,255,0.65);
+    border-left: calc(18px * var(--size)) solid transparent;
+    border-right: calc(18px * var(--size)) solid transparent;
+	filter: blur(calc(3px * var(--size)));
 }
 
 .frame::after {
 	width: 123%;
-    bottom: -125px;
     left: -16%;
-    border-bottom: 30px solid rgb(255, 255, 255, 0.3);
-    border-left: 34px solid transparent;
-    border-right: 34px solid transparent;
-    filter: blur(4px);
+	bottom: -26.2%;
+    border-bottom: calc(30px * var(--size)) solid rgb(255, 255, 255, 0.3);
+    border-left: calc(34px * var(--size)) solid transparent;
+    border-right: calc(34px * var(--size)) solid transparent;
+    filter: blur(calc(4px * var(--size)));
 }
 
 canvas {
-	border-radius: 20px;
 	/* Set the width and height to half the actual size so it doesn't look pixelated */
-	width: 680px;
-	height: 476px;
+	max-width: calc(680px * var(--size));
+	height: calc(476px * var(--size));
+	border-radius: calc(20px * var(--size));
+	/* aspect-ratio: 10 / 7; */
 	background: var(--silver);
 	background: linear-gradient(149deg, 
 				#d0d0d0 0%, 
@@ -64,31 +69,32 @@ canvas {
 				#ececec 27%, 
 				#d0d0d0 55%, 
 				#b4b4b4 86%);
-	box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.6) inset;
+	box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.6) inset; /* TODO replace these values? */
 }
 
 .frame__highlight {
 	position: absolute;
 	width: 100%;
-	height: 38px;
-	bottom: -2px;
+	height: calc(38px * var(--size));
 	left: 0;
-	border-radius: 20px;
-	box-shadow: 0px 7px 3px -2px rgba(255,255,255,0.65);
+	bottom: -0.5%;
+	border-radius: calc(20px * var(--size));
+	box-shadow: 0px 7px 3px -2px rgba(255,255,255,0.65); /* TODO replace these values? */
 }
 
 .frame__knob {
 	position: absolute;
-	bottom: -119px;
-	width: 87px;
-	height: 87px;
-	border: double 11px transparent;
+	/* bottom: -119px; */
+	bottom: -24.8%;
+	width: calc(87px * var(--size));
+	height: calc(87px * var(--size));
+	border: double calc(11px * var(--size)) transparent;
 	border-radius: 50%;
 	background-image: linear-gradient(#ffffff, #ffffff), 
 					  linear-gradient(170deg, #ffffff 0%, #dadada 74%, #adadad 100%);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7);
+	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7); /* TODO replace these values? */
 	z-index: 1;
 }
 
@@ -98,8 +104,8 @@ canvas {
 	position: absolute;
 	content: '';
 	display: block;
-	top: 3px;
-	left: 3px;
+	top: calc(3px * var(--size));
+	left: calc(3px * var(--size));
 	width: 93%;
 	height: 93%;
 	border-radius: 50%;
@@ -121,20 +127,20 @@ canvas {
 	left: 28%;
 	width: 0;
 	height: 0;
-	border-left: 22px solid transparent;
-    border-right: 22px solid transparent;
-    border-bottom: 34px solid #ffffff;
+	border-left: calc(22px * var(--size)) solid transparent;
+    border-right: calc(22px * var(--size)) solid transparent;
+    border-bottom: calc(34px * var(--size)) solid #ffffff;
     border-radius: 39%;
-	box-shadow: 0px 9px 6px -7px rgba(255,255,255,0.85);
+	box-shadow: 0px 9px 6px -7px rgba(255,255,255,0.85); /* TODO replace these values? */
 	transform: rotate(-10deg);
 }
 
 .frame__knob--left {
-	left: -100px;
+	left: -14.75%;
 }
 
 .frame__knob--right {
-	right: -100px;
+	right: -14.75%;
 }
 
 .frame.shake {
@@ -142,7 +148,6 @@ canvas {
 }
 
 @keyframes shake {
-
 	10%,
 	90% {
 		transform: translate3d(-1px, 0, 0);
@@ -162,5 +167,27 @@ canvas {
 	40%,
 	60% {
 		transform: translate3d(4px, 0, 0);
+	}
+}
+
+/**
+* MEDIA QUERIES
+*/
+
+@media (max-width: 1200px) { /* small desktop */
+	:root {
+		--size: 0.8;
+	}
+}
+
+@media (max-width: 767px) { /* tablet */
+	:root {
+		--size: 0.5;
+	}
+}
+
+@media (max-width: 475px) { /* tablet */
+	:root {
+		--size: 0.33;
 	}
 }
