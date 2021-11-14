@@ -41,7 +41,7 @@ canvas {
 	height: 99%;
 	display: block;
 	border-radius: calc(20px * var(--size));
-	opacity: 0.05;
+	opacity: 0.04;
 }
 .canvas__overlay--lines {
 	background: url('../images/etchasketch_background_lines.svg') no-repeat center;
@@ -103,9 +103,51 @@ canvas {
 	box-shadow: 0px 7px 3px -2px rgba(255,255,255,0.65); /* TODO replace these values? */
 }
 
+.frame__side-shading {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.frame__side-shading::before,
+.frame__side-shading::after {
+	content: '';
+    display: block;
+    position: absolute;
+	width: 0;
+    height: 131.4%;
+    top: -21%;
+}
+
+.frame__side-shading::before {
+	left: -16.2%;
+	border-left: calc(40px * var(--size)) solid rgba(0,0,0,0.05);
+    border-top: 33px solid transparent;
+    border-bottom: 33px solid transparent;
+    filter: blur(calc(1px * var(--size)));
+}
+
+.frame__side-shading::after {
+	right: -16.2%;
+    border-right: calc(40px * var(--size)) solid rgba(255,255,255,0.14);
+    border-top: 33px solid transparent;
+    border-bottom: 33px solid transparent;
+    filter: blur(calc(1px * var(--size)));
+
+	/* box-shadow: -12px 0px 2px 0px rgb(255 255 255 / 50%); */
+
+	/* border-right-style: solid;
+	border-right-width: calc(34px * var(--size));
+	border-image: linear-gradient(
+		to right, 
+		rgba(255,255,255,0.3), 
+		rgba(0, 0, 0, 0)
+	  ) 1 90%; */
+}
+
 .frame__knob {
 	position: absolute;
-	/* bottom: -119px; */
 	bottom: -24.8%;
 	width: calc(87px * var(--size));
 	height: calc(87px * var(--size));

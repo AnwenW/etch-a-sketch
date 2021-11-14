@@ -17,7 +17,7 @@ let y = Math.floor(Math.random() * height);
 ctx.lineJoin = 'round'; // square to ensure smooth line edges, squared by default
 ctx.lineCap = 'round';
 ctx.lineWidth = 7; // default width 1px, don't have to specify the unit
-ctx.strokeStyle = '#1e1e1e';
+ctx.strokeStyle = '#262626';
 // ctx.globalAlpha = 0.9;
 
 ctx.beginPath();
