@@ -3,7 +3,7 @@ const canvas = document.querySelector('#etch-a-sketch');
 const frame = document.querySelector('.frame');
 const ctx = canvas.getContext('2d'); // ctx is common for 'context'
 const shakeButton = document.querySelector('.shake');
-const MOVE_AMOUNT = 11; // true constant (that won't be changed) use caps/underscores
+const MOVE_AMOUNT = 10; // true constant (that won't be changed) use caps/underscores
 
 // Make a variable called width/height from the same canvas properties:
 const { width, height } = canvas;
@@ -16,12 +16,9 @@ let y = Math.floor(Math.random() * height);
 // Set up canvas for drawing
 ctx.lineJoin = 'round'; // square to ensure smooth line edges, squared by default
 ctx.lineCap = 'round';
-ctx.lineWidth = 9; // default width 1px, don't have to specify the unit
-
-// let hue = 0;
-ctx.strokeStyle = '#1c1c1c';
-
-ctx.globalAlpha = 0.94;
+ctx.lineWidth = 7; // default width 1px, don't have to specify the unit
+ctx.strokeStyle = '#1e1e1e';
+// ctx.globalAlpha = 0.9;
 
 ctx.beginPath();
 ctx.moveTo(x, y);
@@ -31,9 +28,6 @@ ctx.stroke();
 // Write a draw function
 function draw({ key }) {
 
-    // increment the hsl hue
-    // hue += 2;
-    // ctx.strokeStyle = `hsl(${hue}, 80%, 40%)`;
     // start the path
     ctx.beginPath();
     // move ctx to where X and Y values were
