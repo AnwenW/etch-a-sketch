@@ -41,13 +41,14 @@ canvas {
 	height: 99%;
 	display: block;
 	border-radius: calc(20px * var(--size));
-	opacity: 0.04;
 }
 .canvas__overlay--lines {
 	background: url('../images/etchasketch_background_lines.svg') no-repeat center;
+	opacity: 0.045;
 }
 .canvas__overlay--squares {
 	background-image: url('../images/graph-paper.svg');
+	opacity: 0.03;
 }
 
 /**
@@ -103,23 +104,29 @@ canvas {
 	box-shadow: 0px 7px 3px -2px rgba(255,255,255,0.65); /* TODO replace these values? */
 }
 
+/**
+* TODO Fix side shading --
+* Poss create two separate elements (L/R) so can style before/after for each?
+*/
+
 .frame__side-shading {
 	position: absolute;
 	top: 0;
 	width: 100%;
 	height: 100%;
 }
-
 .frame__side-shading::before,
 .frame__side-shading::after {
 	content: '';
     display: block;
     position: absolute;
 	width: 0;
-    height: 131.4%;
-    top: -21%;
-}
+    /* height: 131.4%;
+    top: -21%; */
 
+	height: 148.3%;
+    top: -21.8%;
+}
 .frame__side-shading::before {
 	left: -16.2%;
 	border-left: calc(40px * var(--size)) solid rgba(0,0,0,0.05);
@@ -127,23 +134,17 @@ canvas {
     border-bottom: 33px solid transparent;
     filter: blur(calc(1px * var(--size)));
 }
-
 .frame__side-shading::after {
-	right: -16.2%;
+	right: -16.5%;
     border-right: calc(40px * var(--size)) solid rgba(255,255,255,0.14);
-    border-top: 33px solid transparent;
-    border-bottom: 33px solid transparent;
-    filter: blur(calc(1px * var(--size)));
-
-	/* box-shadow: -12px 0px 2px 0px rgb(255 255 255 / 50%); */
-
-	/* border-right-style: solid;
-	border-right-width: calc(34px * var(--size));
-	border-image: linear-gradient(
-		to right, 
-		rgba(255,255,255,0.3), 
-		rgba(0, 0, 0, 0)
-	  ) 1 90%; */
+    border-radius: 0 calc(10px * var(--size)) calc(10px * var(--size)) 0;
+    background-image: 	linear-gradient(transparent, transparent), 
+						linear-gradient(to right, #ef1919, #bf0909);
+	background-origin: border-box;
+    background-clip: content-box, border-box;
+	clip-path: polygon(82% 0, 100% 1%, 100% 99%, 82% 100%, 0 95.5%, 0 4.5%);
+	z-index: 1;
+	filter: blur(5px);
 }
 
 .frame__knob {
@@ -207,7 +208,6 @@ canvas {
 .frame__logo {
 	content: '';
 	position: absolute;
-	display: block;
 	width: 105%;
 	height: 15.8%;
 	top: -17.2%;
@@ -215,6 +215,7 @@ canvas {
 	background: url('../images/etchasketch_brand.svg') no-repeat center;
 	transform: translateX(-50%);
 	filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 60%));
+	z-index: 1;
 }
 
 /**
