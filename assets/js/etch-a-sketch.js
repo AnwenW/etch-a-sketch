@@ -65,6 +65,9 @@ function handleKey(e) {
 }
 
 // Write clear canvas/'shake' function
+
+// Is it possible to half-clear the canvas on shake? So you need to shake again to fully clear it?
+
 function clearCanvas() {
     frame.classList.add('shake');
     ctx.clearRect(0, 0, width, height);
@@ -80,3 +83,65 @@ function clearCanvas() {
 // Listen for keys
 window.addEventListener('keydown', handleKey);
 shakeButton.addEventListener('click', clearCanvas);
+
+
+// CHECK SENSITIVITY!! NOT TOO SENSITIVE OR WILL ACCIDENTALLY CLEAR CANVAS
+// Detect mouse movement to run shake/ clear canvas function
+(function() {
+    "use strict";
+    var detectMouseShake = function(subscribe, _a) {
+
+        var interval = _a.interval, 
+            threshold = _a.threshold;
+        var velocity;
+        var direction;
+        var directionChangeCount = 0;
+        var distance = 0;
+
+        var listener = function(event) {
+
+            var nextDirection = Math.sign(event.movementX);
+
+            distance += Math.abs(event.movementX) + Math.abs(event.movementY);
+
+            if (nextDirection !== direction) {
+                direction = nextDirection;
+                directionChangeCount ++;
+            }
+        };
+
+        var intervalClear = setInterval( (function() {
+
+            var nextVelocity = distance / interval;
+
+            if (!velocity) {
+                velocity = nextVelocity;
+                return;
+            }
+
+            var acceleration = (nextVelocity - velocity) / interval;
+
+            if (directionChangeCount && acceleration > threshold) {
+                subscribe( (function() {
+                    clearInterval(intervalClear);
+                    document.removeEventListener("mousemove",listener);
+                }) )
+            }
+
+            distance = 0;
+            directionChangeCount = 0;
+            velocity = nextVelocity;
+
+        }), interval);
+        
+        document.addEventListener("mousemove",listener);
+    };
+        
+    detectMouseShake(function() {
+        // Run canvas shake/ clear canvas function
+        clearCanvas();
+    }, {
+        interval: 350, // ms to reset counter
+        threshold: 0.011, // acceleration of mouse movement threshold
+    });
+})();
