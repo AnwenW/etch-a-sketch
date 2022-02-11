@@ -20,11 +20,6 @@ ctx.lineWidth = 7; // default width 1px, don't have to specify the unit
 ctx.strokeStyle = '#262626';
 // ctx.globalAlpha = 0.9;
 
-ctx.beginPath();
-ctx.moveTo(x, y);
-ctx.lineTo(x, y);
-ctx.stroke();
-
 // Write a draw function
 function draw({ key }) {
 
