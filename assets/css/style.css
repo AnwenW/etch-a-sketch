@@ -1,5 +1,18 @@
+/**
+* Fonts
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
+
+/**
+* TODO:
+* REPLACE PX VALUES (DROP SHADOW ETC)
+*/
+
 :root {
 	--red: #e60b0b;
+	--text-red: #e53734;
 	--silver: #d0d0d0;
 	--dark-grey: #4f4f4f;
 	--arrow: #ed3535;
@@ -21,7 +34,6 @@ canvas {
 	max-width: calc(680px * var(--size));
 	height: calc(476px * var(--size));
 	border-radius: calc(20px * var(--size));
-	/* aspect-ratio: 10 / 7; */
 	background: var(--silver);
 	background: linear-gradient(149deg, 
 				#d0d0d0 0%, 
@@ -29,7 +41,7 @@ canvas {
 				#ececec 27%, 
 				#d0d0d0 55%, 
 				#b4b4b4 86%);
-	box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.6) inset; /* TODO replace these values? */
+	box-shadow: calc(2px * var(--size)) calc(2px * var(--size)) calc(3px * var(--size)) calc(2px * var(--size)) rgba(0,0,0,0.6) inset;
 	position: relative;
 }
 
@@ -65,7 +77,7 @@ canvas {
 	border-color: var(--red);
 	border-radius: calc(10px * var(--size));
 	background-color: var(--red);
-	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7); /* TODO replace these values? */
+	box-shadow: calc(2px * var(--size)) calc(2px * var(--size)) calc(6px * var(--size)) calc(2px * var(--size)) rgba(131, 103, 103, 0.7);
 	position: relative;
 }
 
@@ -88,7 +100,7 @@ canvas {
 .frame::after {
 	width: 123%;
     left: -16%;
-	bottom: -26.2%;
+	bottom: -26.5%;
     border-bottom: calc(30px * var(--size)) solid rgb(255, 255, 255, 0.3);
     border-left: calc(34px * var(--size)) solid transparent;
     border-right: calc(34px * var(--size)) solid transparent;
@@ -102,7 +114,7 @@ canvas {
 	left: 0;
 	bottom: -0.5%;
 	border-radius: calc(20px * var(--size));
-	box-shadow: 0px 7px 3px -2px rgba(255,255,255,0.65); /* TODO replace these values? */
+	box-shadow: 0px calc(8px * var(--size)) calc(3px * var(--size)) calc(-2px * var(--size)) rgba(255,255,255,0.65);
 }
 
 .frame__side-shading {
@@ -150,7 +162,7 @@ canvas {
 					  linear-gradient(170deg, #ffffff 0%, #dadada 74%, #adadad 100%);
 	background-origin: border-box;
 	background-clip: content-box, border-box;
-	box-shadow: 2px 2px 6px 2px rgba(131, 103, 103, 0.7); /* TODO replace these values? */
+	box-shadow: calc(2px * var(--size)) calc(2px * var(--size)) calc(6px * var(--size)) calc(2px * var(--size)) rgba(131, 103, 103, 0.7);
 	z-index: 1;
 }
 .frame__knob--left {
@@ -170,7 +182,7 @@ canvas {
 	top: calc(3px * var(--size));
 	left: calc(3px * var(--size));
 	width: 93%;
-	height: 93%;
+	height: 94%;
 	border-radius: 50%;
 	background: #fdfdfd;
 	background: radial-gradient(circle, 
@@ -193,9 +205,13 @@ canvas {
     border-right: calc(22px * var(--size)) solid transparent;
     border-bottom: calc(34px * var(--size)) solid #ffffff;
     border-radius: 39%;
-	box-shadow: 0px 9px 6px -7px rgba(255,255,255,0.85); /* TODO replace these values? */
+	box-shadow: 0px calc(9px * var(--size)) calc(6px * var(--size)) calc(-7px * var(--size)) rgba(255,255,255,0.85);
 	transform: rotate(-10deg);
 }
+
+/**
+* Frame logo and lettering
+*/
 
 .frame__logo {
 	content: '';
@@ -210,8 +226,7 @@ canvas {
 	z-index: 1;
 }
 
-.frame__lettering
-{
+.frame__lettering {
 	position: absolute;
 	width: 92%;
 	bottom: -20%;
@@ -220,24 +235,42 @@ canvas {
 	text-align: center;
 	opacity: 50%;
 }
-.frame__strapline
-{
-	color: var(--arrow);
-	color: white;
+
+.frame__strapline {
+	margin-bottom: 1%;
+	text-shadow: 1px 1px 3px rgb(0 0 0 / 20%), 0px -1px 1px #fff;
 }
-.frame__strapline--ohio
-{
+.frame__advice-text {
+	color: var(--text-red);
+	text-shadow: 1px 1px 3px rgb(0 0 0 / 20%), 0px -1px 1px rgba(255,255,255,0.85);
+}
+.frame__strapline,
+.frame__advice-text {
+	color: var(--text-red);
+}
+.frame__strapline--ohio {
 	text-transform: uppercase;
+	font-family: 'Play', sans-serif;
+	font-weight: 700;
+	font-size: calc(34px * var(--size));
+    text-shadow: 1px 1px 3px rgb(0 0 0 / 20%), 0px -1px 1px #fff;
+	margin-right: 4%;
+
 }
-.frame__strapline--toys
-{
-	font-family: cursive;
+.frame__strapline--toys {
+	font-family: 'Lobster Two', cursive;
+	font-style: italic;
+	font-size: calc(28px * var(--size));
 }
-.frame__advice-text p
-{
+.frame__advice-text p {
 	text-transform: uppercase;
-	color: white;
+	font-family: sans-serif;
+	font-size: calc(16px * var(--size));
+	letter-spacing: 0.2em;
 	margin: 0;
+}
+.frame__advice-text p:not(:last-of-type) {
+	padding-bottom: 0.3em;
 }
 
 /**
@@ -245,34 +278,28 @@ canvas {
 */
 
 .arrow--left,
-.arrow--right
-{
+.arrow--right {
 	clip-path: polygon(0 20%, 50% 0, 100% 20%, 70% 20%, 70% 80%, 100% 80%, 50% 100%, 0 80%, 30% 80%, 30% 20%);
 	width: calc(15px * var(--size));
 	height: calc(48px * var(--size));
 	background-color: var(--arrow);
 }
-.arrow--left
-{
+.arrow--left {
 	transform: rotate(90deg);
 }
 .arrow--left__container,
-.arrow--right__container
-{
+.arrow--right__container {
 	position: absolute;
 	filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
 }
-.arrow--left__container
-{
+.arrow--left__container {
     bottom: -3%;
     left: -7%;
 }
-.arrow--right__container
-{
+.arrow--right__container {
     bottom: 1%;
     right: -7.75%;
 }
-
 
 /**
 * Shake animation
@@ -305,14 +332,6 @@ canvas {
 	}
 }
 
-.hand {
-	width: calc(344px * var(--size));
-    height: calc(493px * var(--size));
-    position: absolute;
-    left: -63%;
-    top: 35%;
-}
-
 /**
 * MEDIA QUERIES
 */
@@ -321,10 +340,6 @@ canvas {
 	:root {
 		--size: 0.8;
 	}
-
-	/* .hand {
-		left: -74.4%;
-	} */
 }
 
 @media (max-width: 767px) { /* tablet */
