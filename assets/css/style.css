@@ -1,28 +1,315 @@
+/**
+* Fonts
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@1,700&display=swap');
+
+/**
+* TODO:
+* REPLACE PX VALUES (DROP SHADOW ETC)
+*/
+
+:root {
+	--red: #e60b0b;
+	--text-red: #e53734;
+	--silver: #d0d0d0;
+	--dark-grey: #4f4f4f;
+	--arrow: #ed3535;
+	--size: 1; /* 100% */
+}
+
 body {
 	min-height: 100vh;
 	display: grid;
 	align-items: center;
 	justify-items: center;
-	background: white;
-	background: url(https://s3.amazonaws.com/media.locally.net/original/HABA_ALT_2017-08-02-13-22-45.jpg);
-	background-size: cover;
+	background: #FFF;
+	/* background: url(https://s3.amazonaws.com/media.locally.net/original/HABA_ALT_2017-08-02-13-22-45.jpg); */
+	/* background-size: cover; */
 }
 
 canvas {
-	border: 30px solid #e80000;
-	border-radius: 10px;
 	/* Set the width and height to half the actual size so it doesn't look pixelated */
-	width: 800px;
-	height: 500px;
-	background: white;
+	max-width: calc(680px * var(--size));
+	height: calc(476px * var(--size));
+	border-radius: calc(20px * var(--size));
+	background: var(--silver);
+	background: linear-gradient(149deg, 
+				#d0d0d0 0%, 
+				#e5e5e5 12%, 
+				#ececec 27%, 
+				#d0d0d0 55%, 
+				#b4b4b4 86%);
+	box-shadow: calc(2px * var(--size)) calc(2px * var(--size)) calc(3px * var(--size)) calc(2px * var(--size)) rgba(0,0,0,0.6) inset;
+	position: relative;
 }
 
-canvas.shake {
+/* Overlay patterns: https://heropatterns.com/ */
+.canvas__overlay {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 99%;
+	display: block;
+	border-radius: calc(20px * var(--size));
+}
+.canvas__overlay--lines {
+	background: url('../images/etchasketch_background_lines.svg') no-repeat center;
+	opacity: 0.045;
+}
+.canvas__overlay--squares {
+	background-image: url('../images/graph-paper.svg');
+	opacity: 0.03;
+}
+
+/**
+* Frame
+*/
+
+.frame {
+	border-top-width: calc(105px * var(--size));
+	border-right-width: calc(112px * var(--size));
+	border-bottom-width: calc(128px * var(--size));
+	border-left-width: calc(112px * var(--size));
+	border-style: solid;
+	border-color: var(--red);
+	border-radius: calc(10px * var(--size));
+	background-color: var(--red);
+	box-shadow: calc(2px * var(--size)) calc(2px * var(--size)) calc(6px * var(--size)) calc(2px * var(--size)) rgba(131, 103, 103, 0.7);
+	position: relative;
+}
+
+.frame::before,
+.frame::after {
+	content: '';
+    height: 0;
+    display: block;
+    position: absolute;
+}
+.frame::before {
+	width: 121%;
+    left: -13%;
+	top: -18%;
+    border-top: calc(14px * var(--size)) solid rgba(255,255,255,0.65);
+    border-left: calc(18px * var(--size)) solid transparent;
+    border-right: calc(18px * var(--size)) solid transparent;
+	filter: blur(calc(3px * var(--size)));
+}
+.frame::after {
+	width: 123%;
+    left: -16%;
+	bottom: -26.5%;
+    border-bottom: calc(30px * var(--size)) solid rgb(255, 255, 255, 0.3);
+    border-left: calc(34px * var(--size)) solid transparent;
+    border-right: calc(34px * var(--size)) solid transparent;
+    filter: blur(calc(4px * var(--size)));
+}
+
+.frame__highlight {
+	position: absolute;
+	width: 100%;
+	height: calc(38px * var(--size));
+	left: 0;
+	bottom: -0.5%;
+	border-radius: calc(20px * var(--size));
+	box-shadow: 0px calc(8px * var(--size)) calc(3px * var(--size)) calc(-2px * var(--size)) rgba(255,255,255,0.65);
+}
+
+.frame__side-shading {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+.frame__side-shading::before,
+.frame__side-shading::after {
+	content: '';
+    display: block;
+    position: absolute;
+	width: 0;
+	height: 148.3%;
+    top: -21.8%;
+	z-index: 1;
+	filter: blur(5px);
+	background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+.frame__side-shading::before {
+	left: -16.2%;
+	border-left: calc(40px * var(--size)) solid rgba(0,0,0,0.05);
+    background-image: 	linear-gradient(transparent, transparent),
+						linear-gradient(to right, #bf0909, #ed1c1c);
+	clip-path: polygon(2% 1.3%, 8% 0.7%, 18% 0.25%, 100% 5%, 100% 94.5%, 18% 99.75%, 8% 99.3%, 2% 98.7%, 0 98%, 0 2%);
+}
+.frame__side-shading::after {
+	right: -16.5%;
+    border-right: calc(40px * var(--size)) solid rgba(255,255,255,0.14);
+    background-image: 	linear-gradient(transparent, transparent), 
+						linear-gradient(to right, #ef1919, #bf0909);
+	clip-path: polygon(82% 0.25%, 92% 0.7%, 98% 1.3%,100% 5%, 100% 94.5%, 98% 98.7%,92% 99.3%, 82% 99.75%, 0 95.5%, 0 4.5%);
+}
+
+.frame__knob {
+	position: absolute;
+	bottom: -24.8%;
+	width: calc(87px * var(--size));
+	height: calc(87px * var(--size));
+	border: double calc(11px * var(--size)) transparent;
+	border-radius: 50%;
+	background-image: linear-gradient(#ffffff, #ffffff), 
+					  linear-gradient(170deg, #ffffff 0%, #dadada 74%, #adadad 100%);
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	box-shadow: calc(2px * var(--size)) calc(2px * var(--size)) calc(6px * var(--size)) calc(2px * var(--size)) rgba(131, 103, 103, 0.7);
+	z-index: 1;
+}
+.frame__knob--left {
+	left: -14.75%;
+}
+
+.frame__knob--right {
+	right: -14.75%;
+}
+
+/* https://stackoverflow.com/questions/5706963/possible-to-use-border-radius-together-with-a-border-image-which-has-a-gradient */
+
+.frame__knob::before {
+	position: absolute;
+	content: '';
+	display: block;
+	top: calc(3px * var(--size));
+	left: calc(3px * var(--size));
+	width: 93%;
+	height: 94%;
+	border-radius: 50%;
+	background: #fdfdfd;
+	background: radial-gradient(circle, 
+				#ffffff 0%, 
+				#ffffff 8%,
+				#fdfdfd 10%, 
+				#f1f1f1 56%, 
+				#dbdbdb 99%, 
+				#adadad 100%);
+}
+.frame__knob::after {
+	position: absolute;
+	content: '';
+	display: block;
+	top: 50%;
+	left: 28%;
+	width: 0;
+	height: 0;
+	border-left: calc(22px * var(--size)) solid transparent;
+    border-right: calc(22px * var(--size)) solid transparent;
+    border-bottom: calc(34px * var(--size)) solid #ffffff;
+    border-radius: 39%;
+	box-shadow: 0px calc(9px * var(--size)) calc(6px * var(--size)) calc(-7px * var(--size)) rgba(255,255,255,0.85);
+	transform: rotate(-10deg);
+}
+
+/**
+* Frame logo and lettering
+*/
+
+.frame__logo {
+	content: '';
+	position: absolute;
+	width: 105%;
+	height: 15.8%;
+	top: -17.2%;
+	left: 50%;
+	background: url('../images/etchasketch_brand.svg') no-repeat center;
+	transform: translateX(-50%);
+	filter: drop-shadow(1px 1px 1px rgb(0 0 0 / 60%));
+	z-index: 1;
+}
+
+.frame__lettering {
+	position: absolute;
+	width: 92%;
+	bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+	text-align: center;
+	opacity: 50%;
+}
+
+.frame__strapline {
+	margin-bottom: 1%;
+	text-shadow: 1px 1px 3px rgb(0 0 0 / 20%), 0px -1px 1px #fff;
+}
+.frame__advice-text {
+	color: var(--text-red);
+	text-shadow: 1px 1px 3px rgb(0 0 0 / 20%), 0px -1px 1px rgba(255,255,255,0.85);
+}
+.frame__strapline,
+.frame__advice-text {
+	color: var(--text-red);
+}
+.frame__strapline--ohio {
+	text-transform: uppercase;
+	font-family: 'Play', sans-serif;
+	font-weight: 700;
+	font-size: calc(34px * var(--size));
+    text-shadow: 1px 1px 3px rgb(0 0 0 / 20%), 0px -1px 1px #fff;
+	margin-right: 4%;
+
+}
+.frame__strapline--toys {
+	font-family: 'Lobster Two', cursive;
+	font-style: italic;
+	font-size: calc(28px * var(--size));
+}
+.frame__advice-text p {
+	text-transform: uppercase;
+	font-family: sans-serif;
+	font-size: calc(16px * var(--size));
+	letter-spacing: 0.2em;
+	margin: 0;
+}
+.frame__advice-text p:not(:last-of-type) {
+	padding-bottom: 0.3em;
+}
+
+/**
+* Arrows
+*/
+
+.arrow--left,
+.arrow--right {
+	clip-path: polygon(0 20%, 50% 0, 100% 20%, 70% 20%, 70% 80%, 100% 80%, 50% 100%, 0 80%, 30% 80%, 30% 20%);
+	width: calc(15px * var(--size));
+	height: calc(48px * var(--size));
+	background-color: var(--arrow);
+}
+.arrow--left {
+	transform: rotate(90deg);
+}
+.arrow--left__container,
+.arrow--right__container {
+	position: absolute;
+	filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+}
+.arrow--left__container {
+    bottom: -3%;
+    left: -7%;
+}
+.arrow--right__container {
+    bottom: 1%;
+    right: -7.75%;
+}
+
+/**
+* Shake animation
+*/
+
+.frame.shake {
 	animation: shake 0.5s linear 1;
 }
 
 @keyframes shake {
-
 	10%,
 	90% {
 		transform: translate3d(-1px, 0, 0);
@@ -42,5 +329,27 @@ canvas.shake {
 	40%,
 	60% {
 		transform: translate3d(4px, 0, 0);
+	}
+}
+
+/**
+* MEDIA QUERIES
+*/
+
+@media (max-width: 1200px) { /* small desktop */
+	:root {
+		--size: 0.8;
+	}
+}
+
+@media (max-width: 767px) { /* tablet */
+	:root {
+		--size: 0.5;
+	}
+}
+
+@media (max-width: 475px) { /* tablet */
+	:root {
+		--size: 0.33;
 	}
 }
